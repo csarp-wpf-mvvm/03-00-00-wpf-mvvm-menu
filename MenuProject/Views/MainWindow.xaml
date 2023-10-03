@@ -4,19 +4,57 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MenuProject.Views"
+        xmlns:viewmodel="clr-namespace:MenuProject.ViewModels"
+        xmlns:view="clr-namespace:MenuProject.Views"
         mc:Ignorable="d"
-        Title="Kréta - Iskolai adminisztráció" Height="450" Width="800">
-    <DockPanel>
-        <Menu DockPanel.Dock="Top">
-            <MenuItem Header="_Fájl">
-                <MenuItem Header="_Kilépés" />
-            </MenuItem>
-            <MenuItem Header="_Adatok">
-                <MenuItem Header="_Diákok" />
-                <MenuItem Header="_Tanárok" />
-                <MenuItem Header="_Szülők" />
-            </MenuItem>
-        </Menu>
-        <TextBox AcceptsReturn="True" />
-    </DockPanel>
+        Title="Kréta - Iskolai adminisztráció" Height="1024" Width="800">
+    <Window.DataContext>
+        <viewmodel:MainWindowViewModel />
+    </Window.DataContext>
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type viewmodel:WelcomeViewModel}">
+            <view:WelcomeView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodel:StudentViewModel}">
+            <view:StudentView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodel:TeacherViewModel}">
+            <view:TeacherView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodel:ParentViewModel}">
+            <view:ParentView/>
+        </DataTemplate>
+    </Window.Resources>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="20" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Row="0" Grid.Column="0">
+            <Menu>
+                <MenuItem Header="_Fájl">
+                    <MenuItem Header="_Kilépés" />
+                </MenuItem>
+                <MenuItem Header="_Adatok">
+                    <MenuItem Header="_Diákok" Command="{Binding ShowStudentViewCommand}" />
+                    <MenuItem Header="_Tanárok" Command="{Binding ShowTeacherViewCommand}" />
+                    <MenuItem Header="_Szülők" Command="{Binding ShowParantViewCommand}" />
+                </MenuItem>
+            </Menu>
+        </StackPanel>
+        <StatusBar Grid.Row="2" Grid.Column="0">
+            <StatusBarItem>
+                <TextBlock Text="{Binding StatusBarText}"/>
+            </StatusBarItem>
+        </StatusBar>
+
+        <ContentControl Grid.Row="1" Grid.Column="0" Content="{Binding ChildViewModel}"></ContentControl>
+
+    </Grid>
 </Window>
