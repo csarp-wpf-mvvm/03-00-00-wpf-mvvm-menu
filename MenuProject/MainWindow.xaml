@@ -5,8 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MenuProject"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-
-    </Grid>
+        Title="Kréta - Iskolai adminisztráció" Height="450" Width="800">
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="_Fájl">
+                <MenuItem Header="_Kilépés" />
+            </MenuItem>
+            <MenuItem Header="_Adatfeldolgozás">
+                <MenuItem Header="_Diákok" />
+                <MenuItem Header="_Tanárok" />
+                <MenuItem Header="_Szülők" />
+            </MenuItem>
+        </Menu>
+        <TextBox AcceptsReturn="True" />
+    </DockPanel>
 </Window>
